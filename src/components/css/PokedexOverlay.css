@@ -1,0 +1,37 @@
+.pokedex-overlay {
+  position: relative;
+  display: grid;
+  grid-template-columns: [left] 75px [col1] 200px [col2] 75px [right];
+  grid-template-rows: [top] 90px [row1] 250px [row2] auto [bottom];
+  border: 1px solid rgb(0, 0, 0);
+  width: 350px;
+  height: 450px;
+  margin: 20px;
+  background-color: rgb(194, 193, 193);
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px 1px #66abf9;
+  text-align: center;
+  overflow: hidden;
+}
+
+.search-outer {
+  grid-column-start: col1;
+  grid-column-end: col2;
+  grid-row-start: top;
+  grid-row-end: row1;
+  margin-top: 10px;
+}
+
+.search-button {
+  margin-top: 5px;
+}
+
+.pokemoncard-outer{
+  box-sizing: border-box;
+  grid-column-start: col1;
+  grid-row-start: row1;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
