@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PokedexOverlay from './PokedexOverlay';
 import './css/App.css';
 

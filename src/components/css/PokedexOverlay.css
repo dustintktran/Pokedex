@@ -30,7 +30,6 @@
   box-sizing: border-box;
   grid-column-start: col1;
   grid-row-start: row1;
-  border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
 }

@@ -1,25 +1,26 @@
-import React, { FC } from 'react';
+
+import {Pokemon} from '../helpers/pokemonAPIFunctions'
 import sprite from '../resources/scizor_front_sprite.png';
 import star from '../resources/yellowStar.png';
 import './css/PokemonCard.css';
 
-const PokemonCard = () => {
+const PokemonCard = (prop:{pokemon:Pokemon}) => {
 
-  
+  let { id,name,types,stats,sprites } = prop.pokemon;
   return (
     <div className="pokemon-outer">
       <div className="pokemon-top">
-        <img className="pokemon-image" src={sprite}></img>
+        <img className="pokemon-image" src={sprites[0]}></img>
         <div className="pokemon-filler"></div>
       </div>
       <div className="pokemon-bottom">
         <div className="pokemon-info">
-          Scizor
+          {name}
         </div>
       </div>
       {/*========== ^ UNDERNEATH ^ ==========*/}
       <div className="pokemon-overlay">
-        <img className="pokemon-overlay-image" src={sprite}></img>
+        <img className="pokemon-overlay-image" src={sprites[0]}></img>
         <button className="favorite-button">
           <img className="favorite-image" src={star} />
         </button>
@@ -36,18 +37,17 @@ const PokemonCard = () => {
 
         <div className="pokemon-overlay-bottom">
           <br /><br /><br />
-          ID: 212 <br />
-          Name: Scizor <br />
-          <span>Types: Bug, Steel</span>
-          {/*types.length === 1 && <span>Type: {capitalizeFirstLetter(types[0].type.name)}</span>*/}
-          {/*types.length >= 2 && <span>Types: {capitalizeFirstLetter(types[0].type.name)} | {capitalizeFirstLetter(types[1].type.name)}</span>*/}
+          ID: {id} <br />
+          Name: {name} <br />
+          {types.length === 1 && <span>Type: {types[0]}</span>}
+          {types.length >= 2 && <span>Types: {types[0]} | {types[1]}</span>}
           <br />
           <div className="stats-outer">
             <div className="stats-row">
-              HP: 100 Atk: 100 Def: 100
+              HP: {stats[0]} Atk: {stats[1]} Def: {stats[2]}
             </div>
             <div className="stats-row">
-              Spd: 100 SpA: 100 SpD: 100
+              Spd: {stats[3]} SpA: {stats[4]} SpD: {stats[5]}
             </div>
           </div>
         </div>
