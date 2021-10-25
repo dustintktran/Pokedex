@@ -1,6 +1,5 @@
 
-import {Pokemon} from '../helpers/pokemonAPIFunctions'
-import sprite from '../resources/scizor_front_sprite.png';
+import {Pokemon} from '../helpers/pokemonAPIFunctions';
 import star from '../resources/yellowStar.png';
 import './css/PokemonCard.css';
 

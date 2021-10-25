@@ -3,6 +3,7 @@ import PokemonCard from './PokemonCard';
 import './css/PokedexOverlay.css';
 import { Pokemon, newPokemon}from '../helpers/pokemonAPIFunctions';
 import getPokemonInfo from '../helpers/pokemonAPIFunctions';
+// import addPokemonToDatabase from '../helpers/addPokemonToDB';
 
 const PokedexOverlay = ( prop:{ isVisible:boolean }) => {
 
@@ -20,6 +21,16 @@ const PokedexOverlay = ( prop:{ isVisible:boolean }) => {
       setCurrentPokemon(poke);
     }
   }
+
+  // const handleSavePokemon = (poke:Pokemon) => {
+  //   let { id, name, types, stats, sprites } = poke;
+  //   if(id!==0) {
+  //     addPokemonToDatabase(id,name,types,stats,sprites);
+  //   }else {
+  //     console.log('Not valid pokemon');
+  //   }
+    
+  // }
 
   if(prop.isVisible) {
     return (

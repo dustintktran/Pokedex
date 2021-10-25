@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "react-app-env.d.ts", "currentlyNotNeeded/App.test.tsx", "currentlyNotNeeded/setupTests.ts"  ]
+, "react-app-env.d.ts", "currentlyNotNeeded/App.test.tsx", "currentlyNotNeeded/setupTests.ts", "src/helpers"  ]
 }
