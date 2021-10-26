@@ -34,3 +34,17 @@
   overflow: hidden;
 }
 
+.save-outer {
+  grid-column-start: col1;
+  grid-column-end: col2;
+  grid-row-start: row2;
+  grid-row-end: bottom;
+  margin-top: 10px;
+  
+}
+
+.save-button {
+  margin-top: 10px;
+
+}
+

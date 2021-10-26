@@ -1,5 +1,5 @@
 
-import {Pokemon} from '../helpers/pokemonAPIFunctions';
+import {Pokemon} from '../helpers/getPokemonInfo';
 import star from '../resources/yellowStar.png';
 import './css/PokemonCard.css';
 
