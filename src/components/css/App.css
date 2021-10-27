@@ -9,6 +9,15 @@ body {
   margin: 5px;
 }
 
+.temporary{
+  height:600px;
+  width:50%;
+  background-color: black;
+  color:white;
+  padding: 20px;
+  white-space: pre-line;
+}
+
 .favorites-outer {
   position:fixed;
   top:0;
@@ -20,12 +29,21 @@ body {
   overflow: scroll;
 }
 
+.favorites-title {
+  position: relative;
+  top: 0px;
+  left: 10px;
+  width: 100%;
+  line-height: 20px;
+  
+}
+
 .pokemon-card-slot{
   position: relative;
   display: inline-block;
   /* border: 1px solid blue; */
-  width: 240px;
-  height: 300px;
+  width: 220px;
+  height: 280px;
   background-color: white;
   text-align: center;
   overflow: hidden;

@@ -7,7 +7,7 @@ import './css/App.css';
 
 const App = () => {
 
-  const [isPokemonOverlayVisible, setIsPokemonOverlayVisible] = useState(false);
+  const [ isPokemonOverlayVisible, setIsPokemonOverlayVisible ] = useState(false);
   const [ favorites, setFavorites ] = useState([]);
 
   useEffect(() => {
@@ -38,8 +38,18 @@ const App = () => {
     <div className="App">
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
       <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon}/>
+      <div className="temporary">
+        Functionality to add: {"\n"}
+        Login and logout Functionality {"\n"}
+        Favorites per account {"\n"}
+        Search for pokemon moves {"\n"}
+        Search for pokemon abilities {"\n"}
+        Button on pokemon card for more details {"\n"}
+        Page for where to find pokemon per game {"\n"}
+        Team builder with suggestions? {"\n"}
+      </div>
       <div className="favorites-outer">
-      <span>Favorites</span>
+      <div className="favorites-title">Favorites</div>
       {favorites.map(item => {
         return (<div className="pokemon-card-slot">
         <PokemonCard pokemon={item}/>

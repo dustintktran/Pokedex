@@ -21,7 +21,6 @@ const PokemonCard = (prop:{pokemon:Pokemon}) => {
       <div className="pokemon-overlay">
         <img className="pokemon-overlay-image" src={sprites[0]}></img>
         <button className="favorite-button">
-          <img className="favorite-image" src={star} />
         </button>
         {/*!favorite && <button className="favorite-button" onClick={() => {
           props.handleFavorite(props.pokemon, () => {

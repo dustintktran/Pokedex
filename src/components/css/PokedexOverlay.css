@@ -1,5 +1,5 @@
 .pokedex-overlay {
-  position: relative;
+  position: absolute;
   display: grid;
   grid-template-columns: [left] 75px [col1] 200px [col2] 75px [right];
   grid-template-rows: [top] 90px [row1] 250px [row2] auto [bottom];
