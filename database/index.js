@@ -1,10 +1,10 @@
-const PASSWORD = require('./variables');
+const {PASSWORD,DB_HOST} = require('./variables');
 const Sequelize = require('sequelize');
 
 
 const sequelize = new Sequelize('pokedex', 'postgres', PASSWORD, {
-  host: 'localhost',
-  dialect: 'postgres'
+  host: DB_HOST,
+  dialect: 'postgres',
 });
 
 sequelize.authenticate()

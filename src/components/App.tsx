@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Pokemon, newPokemon }from '../helpers/getPokemonInfo';
 import PokedexOverlay from './PokedexOverlay';
 import $ from 'jquery';
 import './css/App.css';
@@ -10,22 +11,32 @@ const App = () => {
 
   useEffect(() => {
     getFavoritesFromDB();
-  })
+  },[])
 
   const handlePokemonSearchOverlayButton = () => {
     setIsPokemonOverlayVisible(!isPokemonOverlayVisible);
   }
 
   const getFavoritesFromDB = () => {
-    $.get('http://localhost:8080/api/getFav').then(item => {
-      console.log(item);
+    $.get('/api/getFav').then(item => {
+      console.log('in get favs ', item);
+      setFavorites(item);
     })
+  }
+
+  const handleSavePokemon = (poke:Pokemon) => {
+    let { id, name, types, stats, sprites } = poke;
+    console.log('addPokemonToDB');
+    $.post(`/api/add`, {pokemon: poke}).then((item) => {
+      console.log(item + ' added');
+      getFavoritesFromDB();
+    });
   }
 
   return (
     <div className="App">
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
-      <PokedexOverlay isVisible={isPokemonOverlayVisible}/>
+      <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon}/>
       <div className="favorites-outer"></div>
     </div>
   )

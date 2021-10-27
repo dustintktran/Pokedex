@@ -1,8 +1,8 @@
 const models = require('../database/models');
 
-const getFavorites = () => {
-  models.Pokemon.findAll().then((item) => {
-    console.log(item);
+const getFavorites = async () => {
+  return await models.Pokemon.findAll().then((item) => {
+    return item;
   })
 }
 

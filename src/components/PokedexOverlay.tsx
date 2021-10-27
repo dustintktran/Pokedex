@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import $ from 'jquery';
 import PokemonCard from './PokemonCard';
 import './css/PokedexOverlay.css';
-import { Pokemon, newPokemon}from '../helpers/getPokemonInfo';
+import { Pokemon, newPokemon }from '../helpers/getPokemonInfo';
 import getPokemonInfo from '../helpers/getPokemonInfo';
 // import addPokemonToDatabase from '../helpers/addPokemonToDB';
 
-const PokedexOverlay = ( prop:{ isVisible:boolean }) => {
+const PokedexOverlay = ( prop:{ isVisible:boolean, savePoke:any }) => {
 
   const [input, setInput] = useState('');
   const [currentPokemon, setCurrentPokemon] = useState(newPokemon(0,'',[],[],[]));
@@ -21,12 +21,6 @@ const PokedexOverlay = ( prop:{ isVisible:boolean }) => {
     if(poke.id !== 0) {
       setCurrentPokemon(poke);
     }
-  }
-
-  const handleSavePokemon = (poke:Pokemon) => {
-    let { id, name, types, stats, sprites } = poke;
-    console.log('addPokemonToDB');
-    $.post('http://localhost:8080/api/add', {pokemon: poke}).then(() => console.log('added'));
   }
 
   if(prop.isVisible) {
@@ -50,7 +44,7 @@ const PokedexOverlay = ( prop:{ isVisible:boolean }) => {
         </div>
         {/* =====POKEMON CARD END===== */}
         <div className="save-outer">
-        <button className="save-button" onClick={() => handleSavePokemon(currentPokemon)}>Save To Favorites</button>
+        <button className="save-button" onClick={() => prop.savePoke(currentPokemon)}>Save To Favorites</button>
         </div>
         
       </div>
