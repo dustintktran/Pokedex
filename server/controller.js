@@ -5,8 +5,9 @@ module.exports = {
     res.send({});
   }),
   addPokemon: ('/', (req, res) => {
-    addPokemon(req.body.pokemon);
-    res.send(req.body.pokemon.name);
+    addPokemon(req.body.pokemon).then(item => {
+      res.send(req.body.pokemon.name);
+    })
   }),
   getFavorites: ('/', (req, res) => {
     getFavorites().then((arr) => {

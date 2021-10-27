@@ -8,3 +8,25 @@ body {
 .overlay-search-button {
   margin: 5px;
 }
+
+.favorites-outer {
+  position:fixed;
+  top:0;
+  right:0;
+  height: 100vh;
+  width: 50%;
+  background-color: white;
+  padding: 10px;
+  overflow: scroll;
+}
+
+.pokemon-card-slot{
+  position: relative;
+  display: inline-block;
+  /* border: 1px solid blue; */
+  width: 240px;
+  height: 300px;
+  background-color: white;
+  text-align: center;
+  overflow: hidden;
+}

@@ -26,7 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "nodemon ./server/index.js"
+    "serve": "nodemon ./server/index.js",
+    "emptyFavorites": "node ./database/deleteDB.js"
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {

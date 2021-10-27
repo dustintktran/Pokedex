@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Pokemon, newPokemon }from '../helpers/getPokemonInfo';
 import PokedexOverlay from './PokedexOverlay';
+import PokemonCard from './PokemonCard';
 import $ from 'jquery';
 import './css/App.css';
 
@@ -37,7 +38,14 @@ const App = () => {
     <div className="App">
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
       <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon}/>
-      <div className="favorites-outer"></div>
+      <div className="favorites-outer">
+      <span>Favorites</span>
+      {favorites.map(item => {
+        return (<div className="pokemon-card-slot">
+        <PokemonCard pokemon={item}/>
+        </div>)
+      })}
+      </div>
     </div>
   )
 }
