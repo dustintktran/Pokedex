@@ -3,6 +3,7 @@ const sequelize = require('./index.js');
 const Model = Sequelize.Model;
 
 class Pokemon extends Model {}
+class Account extends Model {}
 
 Pokemon.init({
   id:{
@@ -18,6 +19,17 @@ Pokemon.init({
   sequelize,
   modelName: 'Pokemon'
 })
+
+Account.init({
+  id:{
+    type:Sequelize.DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false
+  },
+  username: Sequelize.STRING,
+  password: Sequelize.STRING
+})
+
 
 Pokemon.sync();
 
