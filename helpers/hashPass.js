@@ -25,9 +25,4 @@ const matchPass = (salt, pass) => {
   return hashed;
 }
 
-// hashPass('password');
-// hashPass('password2');
-
-//matchPass('oafqxyudio', 'password');
-
-module.exports = {hashPass, matchPass};
+module.exports = hashPass;
