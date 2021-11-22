@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Pokemon, newPokemon }from '../helpers/getPokemonInfo';
 import Register from './Register';
+import Login from './Login';
 import PokedexOverlay from './PokedexOverlay';
 import PokemonCard from './PokemonCard';
 import $ from 'jquery';
@@ -16,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     getFavoritesFromDB();
-    if(currentUser !== "") {
+    if(!currentUser) {
       setIsLoggedIn(true);
     }
   },[])
@@ -41,32 +42,33 @@ const App = () => {
     });
   }
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
+  const handleLogin = (bool:boolean) => {
+    if(bool) {
+      //login and set current user refresh
+    } else {
+      //nothing
+    }
   }
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    //setusername to none
   }
   
-  const handleRegister = () => {
-
-  }
 
   return (
     <div className="App">
       {!isLoggedIn && 
       <div>
         <Register />
-        <span><button onClick={handleLogin}>Login</button></span>
       </div>}
       {isLoggedIn &&
       <div>
         <span><button onClick={handleLogout}>Logout</button></span>
       </div>
       }
-      
-      
+      <Login loggedIn={isLoggedIn}/>
+      {localStorage.getItem('username')}
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
       <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon}/>
       <div className="temporary">

@@ -8,10 +8,11 @@ module.exports = {
   }),
   login: ('/', (req, res) => {
     login(req.body.username, req.body.password).then(response => {
+      console.log(response);
       if(response == true) {
-        return req.body.usename;
+        res.send(req.body.username);
       } else {
-        return null;
+        res.send(null);
       }
     })
   }),
