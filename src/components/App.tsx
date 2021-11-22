@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Pokemon, newPokemon }from '../helpers/getPokemonInfo';
-import Register from './Register';
-import Login from './Login';
+import Account from './Account';
 import PokedexOverlay from './PokedexOverlay';
 import PokemonCard from './PokemonCard';
 import $ from 'jquery';
@@ -12,7 +11,6 @@ const App = () => {
   const [ isPokemonOverlayVisible, setIsPokemonOverlayVisible ] = useState(false);
   const [ favorites, setFavorites ] = useState([]);
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-  const [ username, setUsername ] = useState('');
   const [ currentUser, setCurrentUser ] = useState(localStorage.getItem('username'));
 
   useEffect(() => {
@@ -42,12 +40,18 @@ const App = () => {
     });
   }
 
-  const handleLogin = (bool:boolean) => {
-    if(bool) {
-      //login and set current user refresh
-    } else {
-      //nothing
-    }
+  const handleLogin = async (username:string, password:string) => {
+    await $.post('/api/login', {username:username,password:password}).then(item => {
+      if(item) {
+        localStorage.setItem('username', username);
+        console.log('login successful');
+        return true;
+      } else {
+        console.log('login failed');
+        return false;
+      }
+    })
+    //set current user?
   }
 
   const handleLogout = () => {
@@ -58,16 +62,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {!isLoggedIn && 
-      <div>
-        <Register />
-      </div>}
-      {isLoggedIn &&
-      <div>
-        <span><button onClick={handleLogout}>Logout</button></span>
-      </div>
-      }
-      <Login loggedIn={isLoggedIn}/>
+      <Account isLoggedIn={isLoggedIn} handleLogin={handleLogin}/>
       {localStorage.getItem('username')}
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
       <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon}/>
