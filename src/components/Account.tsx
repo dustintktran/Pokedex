@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 
-const Account = (props: {isLoggedIn:boolean, handleLogin:(username:string, password:string)=>Promise<void>}) => { //props: handleLogin, isLoggedIn
+const Account = (props: {isLoggedIn:boolean, handleLogin:(username:string, password:string)=>Promise<void>, handleLogout:()=>void}) => { //props: handleLogin, isLoggedIn
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -15,7 +15,7 @@ const Account = (props: {isLoggedIn:boolean, handleLogin:(username:string, passw
     if(props.isLoggedIn) {
       setVisibleNode(2);
     }
-  }, [])
+  })
 
   const handleRegister = () => {
     $.post('/api/register', {username:username,password:password}).then(item => {
@@ -47,6 +47,10 @@ const Account = (props: {isLoggedIn:boolean, handleLogin:(username:string, passw
       </div>}
       {visibleNode == 2 && <div className="logged-in-outer">
         You are logged in! Yippee!
+        <div><button onClick={() => {
+          props.handleLogout();
+          setVisibleNode(0);
+          }}> Logout</button></div>
       </div>}
     </div>
   )

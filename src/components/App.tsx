@@ -15,8 +15,9 @@ const App = () => {
 
   useEffect(() => {
     getFavoritesFromDB();
-    if(!currentUser) {
+    if(localStorage.getItem('username') !== '') {
       setIsLoggedIn(true);
+      setCurrentUser(localStorage.getItem('username'));
     }
   },[])
 
@@ -50,19 +51,24 @@ const App = () => {
         console.log('login failed');
         return false;
       }
+    }).then(item => {
+      if(item) {
+        setCurrentUser(username);
+        setIsLoggedIn(true);
+      }
     })
-    //set current user?
   }
 
   const handleLogout = () => {
+    localStorage.setItem('username','');
     setIsLoggedIn(false);
-    //setusername to none
+    setCurrentUser('');
   }
   
 
   return (
     <div className="App">
-      <Account isLoggedIn={isLoggedIn} handleLogin={handleLogin}/>
+      <Account isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}/>
       {localStorage.getItem('username')}
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
       <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon}/>
