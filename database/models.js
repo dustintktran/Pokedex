@@ -4,7 +4,24 @@ const Model = Sequelize.Model;
 
 class Pokemon extends Model {}
 class Profile extends Model {}
+class MyTeam extends Model {}
 
+MyTeam.init({
+  id: {
+    type: Sequelize.DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false
+  }
+  /*profileId: {
+
+  },
+  pokemon: {
+
+  }*/
+}, {
+  sequelize,
+  modelName: 'MyTeam'
+})
 Pokemon.init({
   id:{
     type: Sequelize.DataTypes.INTEGER,
@@ -21,9 +38,14 @@ Pokemon.init({
 })
 
 Profile.init({
+  id:{
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    allowNull: false
+  },
   username:{
     type:Sequelize.STRING,
-    primaryKey: true,
+    unique: true,
     allowNull: false
   },
   password: Sequelize.STRING,
@@ -36,5 +58,6 @@ Profile.init({
 
 Pokemon.sync();
 Profile.sync();
+MyTeam.sync();
 
 module.exports = {Pokemon, Profile};

@@ -74,7 +74,6 @@ const App = () => {
       <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon}/>
       <div className="temporary">
         Functionality to add: {"\n"}
-        Login and logout Functionality {"\n"}
         Favorites per account {"\n"}
         Search for pokemon moves {"\n"}
         Search for pokemon abilities {"\n"}
