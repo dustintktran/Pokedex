@@ -1,0 +1,19 @@
+
+(as super user su ): ssh -i pokedex.pem ec2-13-57-18-38.us-west-1.compute.amazonaws.com
+sudo -u postgres psql
+
+create table:
+CREATE TABLE IF NOT EXISTS "Pokemons" ("id" INTEGER NOT NULL , "name" VARCHAR(255), "types" VARCHAR(255)[], "stats" INTEGER[], "sprites" VARCHAR(255)[], "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, "TeamId" INTEGER REFERENCES "Teams" ("id") ON DELETE SET NULL ON UPDATE CASCADE, PRIMARY KEY ("id"));
+
+add relations:
+ALTER TABLE profiles
+ADD COLUMN team_id INTEGER REFERENCES teams(id);
+
+ALTER TABLE teams
+ADD COLUMN profile_id INTEGER REFERENCES profiles(id);
+
+CREATE TABLE pokemon_team (
+  pokemon_id INTEGER REFERENCES pokemons(id),
+  team_id INTEGER REFERENCES teams(id),
+  CONSTRAINT pokemon_team_pkey PRIMARY KEY (pokemon_id, team_id)
+);
