@@ -4,23 +4,18 @@ const Model = Sequelize.Model;
 
 class Pokemon extends Model {}
 class Profile extends Model {}
-class MyTeam extends Model {}
+class Team extends Model {}
 
-MyTeam.init({
+Team.init({
   id: {
     type: Sequelize.DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false
   }
-  /*profileId: {
-
-  },
-  pokemon: {
-
-  }*/
 }, {
   sequelize,
-  modelName: 'MyTeam'
+  modelName: 'Team',
+  freezeTableName: true
 })
 Pokemon.init({
   id:{
@@ -34,7 +29,8 @@ Pokemon.init({
   sprites: Sequelize.ARRAY(Sequelize.STRING)
 },{
   sequelize,
-  modelName: 'Pokemon'
+  modelName: 'Pokemon',
+  freezeTableName: true
 })
 
 Profile.init({
@@ -52,12 +48,22 @@ Profile.init({
   salt: Sequelize.STRING
 },{
   sequelize,
-  modelName: 'Profile'
+  modelName: 'Profile',
+  freezeTableName: true
 })
-
 
 Pokemon.sync();
 Profile.sync();
-MyTeam.sync();
+Team.sync();
+
+// Pokemon.sync({force: true});
+// Profile.sync({force: true});
+// Team.sync({force: true});
+
+Team.belongsTo(Profile);
+Team.hasMany(Pokemon);
+// Pokemon.belongsToMany(Team, {through: 'TeamPokemon'});
 
 module.exports = {Pokemon, Profile};
+
+//{force: true}
