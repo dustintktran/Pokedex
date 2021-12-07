@@ -24,3 +24,4 @@ yarn-error.log*
 /currentlyNotNeeded
 /database/variables.js
 /pokedex.pem
+/personalNotes

@@ -71,7 +71,7 @@ const App = () => {
       <Account isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}/>
       {localStorage.getItem('username')}
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
-      <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon}/>
+      <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon} loggedIn={isLoggedIn}/>
       <div className="temporary">
         Functionality to add: {"\n"}
         Favorites per account {"\n"}

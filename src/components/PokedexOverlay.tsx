@@ -4,9 +4,8 @@ import PokemonCard from './PokemonCard';
 import './css/PokedexOverlay.css';
 import { Pokemon, newPokemon }from '../helpers/getPokemonInfo';
 import getPokemonInfo from '../helpers/getPokemonInfo';
-// import addPokemonToDatabase from '../helpers/addPokemonToDB';
 
-const PokedexOverlay = ( prop:{ isVisible:boolean, savePoke:any }) => {
+const PokedexOverlay = ( prop:{ isVisible:boolean, savePoke:any, loggedIn:boolean }) => {
 
   const [input, setInput] = useState('');
   const [currentPokemon, setCurrentPokemon] = useState(newPokemon(0,'',[],[],[]));
@@ -44,7 +43,9 @@ const PokedexOverlay = ( prop:{ isVisible:boolean, savePoke:any }) => {
         </div>
         {/* =====POKEMON CARD END===== */}
         <div className="save-outer">
+        {prop.loggedIn && 
         <button className="save-button" onClick={() => prop.savePoke(currentPokemon)}>Save To Favorites</button>
+        }
         </div>
         
       </div>

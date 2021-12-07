@@ -6,17 +6,37 @@ class Pokemon extends Model {}
 class Profile extends Model {}
 class Team extends Model {}
 
-Team.init({
-  id: {
-    type: Sequelize.DataTypes.INTEGER,
-    primaryKey: true,
+Profile.init({
+  // id:{
+  //   type: Sequelize.INTEGER,
+  //   primaryKey: true,
+  //   allowNull: false,
+  //   autoIncrement: true
+  // },
+  username:{
+    type:Sequelize.STRING,
+    unique: true,
     allowNull: false
-  }
+  },
+  password: Sequelize.STRING,
+  salt: Sequelize.STRING
+},{
+  sequelize,
+  modelName: 'profile'
+})
+
+Team.init({
+  // id: {
+  //   type: Sequelize.DataTypes.INTEGER,
+  //   primaryKey: true,
+  //   allowNull: false,
+  //   autoIncrement: true
+  // }
 }, {
   sequelize,
-  modelName: 'Team',
-  freezeTableName: true
+  modelName: 'team'
 })
+
 Pokemon.init({
   id:{
     type: Sequelize.DataTypes.INTEGER,
@@ -29,28 +49,12 @@ Pokemon.init({
   sprites: Sequelize.ARRAY(Sequelize.STRING)
 },{
   sequelize,
-  modelName: 'Pokemon',
-  freezeTableName: true
+  modelName: 'pokemon'
 })
 
-Profile.init({
-  id:{
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    allowNull: false
-  },
-  username:{
-    type:Sequelize.STRING,
-    unique: true,
-    allowNull: false
-  },
-  password: Sequelize.STRING,
-  salt: Sequelize.STRING
-},{
-  sequelize,
-  modelName: 'Profile',
-  freezeTableName: true
-})
+Team.belongsTo(Profile, {as: 'team'});
+Team.hasMany(Pokemon, {as: 'pokemon'});
+Pokemon.belongsToMany(Team, {through: 'team_pokemon'});
 
 Pokemon.sync();
 Profile.sync();
@@ -59,10 +63,6 @@ Team.sync();
 // Pokemon.sync({force: true});
 // Profile.sync({force: true});
 // Team.sync({force: true});
-
-Team.belongsTo(Profile);
-Team.hasMany(Pokemon);
-// Pokemon.belongsToMany(Team, {through: 'TeamPokemon'});
 
 module.exports = {Pokemon, Profile};
 
