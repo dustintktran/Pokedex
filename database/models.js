@@ -7,12 +7,6 @@ class Profile extends Model {}
 class Team extends Model {}
 
 Profile.init({
-  // id:{
-  //   type: Sequelize.INTEGER,
-  //   primaryKey: true,
-  //   allowNull: false,
-  //   autoIncrement: true
-  // },
   username:{
     type:Sequelize.STRING,
     unique: true,
@@ -26,12 +20,7 @@ Profile.init({
 })
 
 Team.init({
-  // id: {
-  //   type: Sequelize.DataTypes.INTEGER,
-  //   primaryKey: true,
-  //   allowNull: false,
-  //   autoIncrement: true
-  // }
+
 }, {
   sequelize,
   modelName: 'team'
@@ -51,10 +40,10 @@ Pokemon.init({
   sequelize,
   modelName: 'pokemon'
 })
-
-Team.belongsTo(Profile, {as: 'team'});
-Team.hasMany(Pokemon, {as: 'pokemon'});
-Pokemon.belongsToMany(Team, {through: 'team_pokemon'});
+// Profile.Team = Profile.hasOne(Team, {foreignKey: "profile_id"});
+Team.Profile = Team.hasOne(Profile, {foreignKey: 'team_id'});
+Team.Pokemon = Pokemon.belongsToMany(Team, {through: 'team_pokemon'});
+Pokemon.Team = Team.belongsToMany(Pokemon, {through: 'team_pokemon'});
 
 Pokemon.sync();
 Profile.sync();
@@ -64,6 +53,6 @@ Team.sync();
 // Profile.sync({force: true});
 // Team.sync({force: true});
 
-module.exports = {Pokemon, Profile};
+module.exports = {Pokemon, Profile, Team};
 
 //{force: true}

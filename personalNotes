@@ -9,7 +9,7 @@ add relations:
 ALTER TABLE profiles
 ADD COLUMN team_id INTEGER REFERENCES teams(id);
 
-ALTER TABLE teams
+ALTER TABLE teams -- DONT NEED THIS
 ADD COLUMN profile_id INTEGER REFERENCES profiles(id);
 
 CREATE TABLE pokemon_team (

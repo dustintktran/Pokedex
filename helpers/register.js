@@ -7,7 +7,17 @@ const register = async (username, password) => {
       let hasher = hashPass(password);
       let hashedPassword = hasher[0];
       let salt = hasher[1];
-      models.Profile.create({username:username, password:hashedPassword, salt:salt})
+      const newTeam = models.Team.create({
+        profile: {
+          username:username, 
+          password:hashedPassword, 
+          salt:salt
+        }}, {
+          include: [{
+            association: models.Team.Profile
+          }]
+        })
+
       return username;
     } else {
       return null;
@@ -23,3 +33,9 @@ const register = async (username, password) => {
 }
 
 module.exports = register;
+
+
+      // const newProfile = models.Profile.create({username:username, password:hashedPassword, salt:salt, team:{}},
+      //   {include: [{ 
+      //     association: models.Profile.Team 
+      //   }]})
