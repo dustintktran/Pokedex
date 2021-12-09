@@ -16,8 +16,7 @@ const register = async (username, password) => {
           include: [{
             association: models.Team.Profile
           }]
-        })
-
+      })
       return username;
     } else {
       return null;

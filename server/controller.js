@@ -8,9 +8,9 @@ module.exports = {
   }),
   login: ('/', (req, res) => {
     login(req.body.username, req.body.password).then(response => {
-      console.log(response);
-      if(response == true) {
-        res.send(req.body.username);
+      //console.log(response);
+      if(response) {
+        res.send(response);
       } else {
         res.send(null);
       }
@@ -26,7 +26,7 @@ module.exports = {
     })
   }),
   addPokemon: ('/', (req, res) => {
-    addPokemon(req.body.pokemon).then(item => {
+    addPokemon(req.body.pokemon, req.body.team_id).then(item => {
       res.send(req.body.pokemon.name);
     })
   }),

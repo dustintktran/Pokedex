@@ -47,6 +47,7 @@ const Account = (props: {isLoggedIn:boolean, handleLogin:(username:string, passw
       </div>}
       {visibleNode == 2 && <div className="logged-in-outer">
         You are logged in! Yippee!
+        <div>{localStorage.getItem('username')}</div>
         <div><button onClick={() => {
           props.handleLogout();
           setVisibleNode(0);

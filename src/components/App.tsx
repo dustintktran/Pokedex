@@ -32,10 +32,9 @@ const App = () => {
     })
   }
 
-  const handleSavePokemon = (poke:Pokemon) => {
+  const handleSavePokemon = (poke:Pokemon, team:number) => {
     let { id, name, types, stats, sprites } = poke;
-    console.log('addPokemonToDB');
-    $.post(`/api/add`, {pokemon: poke}).then((item) => {
+    $.post(`/api/add`, {pokemon: poke, team_id:team}).then((item) => {
       console.log(item + ' added');
       getFavoritesFromDB();
     });
@@ -45,6 +44,8 @@ const App = () => {
     await $.post('/api/login', {username:username,password:password}).then(item => {
       if(item) {
         localStorage.setItem('username', username);
+        localStorage.setItem('profile_id', item.id);
+        localStorage.setItem('team_id', item.team_id);
         console.log('login successful');
         return true;
       } else {
@@ -61,6 +62,8 @@ const App = () => {
 
   const handleLogout = () => {
     localStorage.setItem('username','');
+    localStorage.setItem('profile_id', '');
+    localStorage.setItem('team_id', '');
     setIsLoggedIn(false);
     setCurrentUser('');
   }
@@ -69,7 +72,6 @@ const App = () => {
   return (
     <div className="App">
       <Account isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}/>
-      {localStorage.getItem('username')}
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
       <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon} loggedIn={isLoggedIn}/>
       <div className="temporary">

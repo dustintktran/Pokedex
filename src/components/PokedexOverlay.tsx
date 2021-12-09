@@ -44,7 +44,7 @@ const PokedexOverlay = ( prop:{ isVisible:boolean, savePoke:any, loggedIn:boolea
         {/* =====POKEMON CARD END===== */}
         <div className="save-outer">
         {prop.loggedIn && 
-        <button className="save-button" onClick={() => prop.savePoke(currentPokemon)}>Save To Favorites</button>
+        <button className="save-button" onClick={() => prop.savePoke(currentPokemon, localStorage.getItem('team_id'))}>Save To Favorites</button>
         }
         </div>
         

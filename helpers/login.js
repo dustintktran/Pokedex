@@ -6,7 +6,7 @@ const login = async (username, password) => {
     if(account) {
       if(account.password == matchPass(account.salt, password)) {
         //console.log('login correct');
-        return true;
+        return account;
       }
     } else {
       //console.log('login incorrect');

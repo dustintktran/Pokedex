@@ -42,8 +42,8 @@ Pokemon.init({
 })
 // Profile.Team = Profile.hasOne(Team, {foreignKey: "profile_id"});
 Team.Profile = Team.hasOne(Profile, {foreignKey: 'team_id'});
-Team.Pokemon = Pokemon.belongsToMany(Team, {through: 'team_pokemon'});
-Pokemon.Team = Team.belongsToMany(Pokemon, {through: 'team_pokemon'});
+Pokemon.Team = Pokemon.belongsToMany(Team, {through: 'pokemon_team', timestamps: false, foreignKey: 'pokemon_id'});
+Team.Pokemon = Team.belongsToMany(Pokemon, {through: 'pokemon_team', timestamps: false, foreignKey: 'team_id'});
 
 Pokemon.sync();
 Profile.sync();
