@@ -1,10 +1,12 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./index.js');
+const Op = sequelize.Op;
 const Model = Sequelize.Model;
 
-class Pokemon extends Model {}
-class Profile extends Model {}
-class Team extends Model {}
+class Pokemon extends Model {};
+class Profile extends Model {};
+class Team extends Model {};
+class PokemonTeam extends Model {};
 
 Profile.init({
   username:{
@@ -40,7 +42,16 @@ Pokemon.init({
   sequelize,
   modelName: 'pokemon'
 })
+
+PokemonTeam.init({
+  pokemon_id: Sequelize.NUMBER,
+  team_id: Sequelize.NUMBER
+}, {
+  sequelize,
+  modelName: 'pokemon_team'
+})
 // Profile.Team = Profile.hasOne(Team, {foreignKey: "profile_id"});
+
 Team.Profile = Team.hasOne(Profile, {foreignKey: 'team_id'});
 Pokemon.Team = Pokemon.belongsToMany(Team, {through: 'pokemon_team', timestamps: false, foreignKey: 'pokemon_id'});
 Team.Pokemon = Team.belongsToMany(Pokemon, {through: 'pokemon_team', timestamps: false, foreignKey: 'team_id'});
@@ -48,11 +59,12 @@ Team.Pokemon = Team.belongsToMany(Pokemon, {through: 'pokemon_team', timestamps:
 Pokemon.sync();
 Profile.sync();
 Team.sync();
+PokemonTeam.sync();
 
 // Pokemon.sync({force: true});
 // Profile.sync({force: true});
 // Team.sync({force: true});
 
-module.exports = {Pokemon, Profile, Team};
+module.exports = {Pokemon, Profile, Team, PokemonTeam};
 
 //{force: true}

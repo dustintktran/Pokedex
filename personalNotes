@@ -12,7 +12,7 @@ ADD COLUMN team_id INTEGER REFERENCES teams(id);
 ALTER TABLE teams -- DONT NEED THIS
 ADD COLUMN profile_id INTEGER REFERENCES profiles(id);
 
-CREATE TABLE pokemon_team (
+CREATE TABLE pokemon_teams (
   pokemon_id INTEGER REFERENCES pokemons(id),
   team_id INTEGER REFERENCES teams(id),
   CONSTRAINT pokemon_team_pkey PRIMARY KEY (pokemon_id, team_id)

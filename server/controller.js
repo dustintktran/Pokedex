@@ -18,6 +18,7 @@ module.exports = {
   }),
   register: ('/', (req, res) =>  {
     register(req.body.username, req.body.password).then(response => {
+      console.log('inside controller', response);
       if(response == null) { //maybe change this to a switch with why the registration failed
         res.send('error');
       } else {
@@ -31,7 +32,9 @@ module.exports = {
     })
   }),
   getFavorites: ('/', (req, res) => {
-    getFavorites().then((arr) => {
+    console.log('team id selected', req.query.team_id);
+    getFavorites(req.query.team_id).then((arr) => {
+      console.log('IN THE CONTROLLER', arr);
       res.send(arr);
     })
   })

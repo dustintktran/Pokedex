@@ -14,11 +14,11 @@ const App = () => {
   const [ currentUser, setCurrentUser ] = useState(localStorage.getItem('username'));
 
   useEffect(() => {
-    getFavoritesFromDB();
     if(localStorage.getItem('username') !== '') {
       setIsLoggedIn(true);
       setCurrentUser(localStorage.getItem('username'));
     }
+    getFavoritesFromDB();
   },[])
 
   const handlePokemonSearchOverlayButton = () => {
@@ -26,7 +26,10 @@ const App = () => {
   }
 
   const getFavoritesFromDB = () => {
-    $.get('/api/getFav').then(item => {
+    if(!isLoggedIn) {
+      return;
+    }
+    $.get('/api/getFav', {team_id: localStorage.getItem('team_id')}).then(item => {
       console.log('in get favs ', item);
       setFavorites(item);
     })
