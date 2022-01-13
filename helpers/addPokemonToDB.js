@@ -1,21 +1,16 @@
 const models = require('../database/models');
 
-const addPokemonToDatabase = async ({id, name, types, stats, sprites}, team_id, cb) => {
+const addPokemonToDatabase = async ({id, name, types, stats, sprites}, team_id) => {
 
-  return await models.Pokemon.findByPk(id).then(item => {
-    if(!item) {
-      models.Team.findOne({where: { 'id': team_id }}).then((team) => {
-        models.Pokemon.create({id, name, types, stats, sprites}).then((pokemon) => {
-          team.addPokemons(pokemon);
-        })
-      })
-    } else {
-      console.log('pokemon already in DB');
-      models.Team.findOne({where: { 'id': team_id }}).then((team) => {
-        team.addPokemons(item);
-      })
-    }
-  })
+  const pokemon = await models.Pokemon.findByPk(id);
+  if(!pokemon) {
+    const team = await models.Team.findOne({where: { 'id': team_id }});
+    const newPokemon = await models.Pokemon.create({id, name, types, stats, sprites});
+    team.addPokemons(newPokemon);
+  } else {
+    console.log('pokemon already in DB');
+    const team = await models.Team.findOne({where: { 'id': team_id }})
+    team.addPokemons(pokemon);
+  }
 }
-
 module.exports = addPokemonToDatabase;

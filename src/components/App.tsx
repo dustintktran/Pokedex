@@ -85,6 +85,7 @@ const App = () => {
         Button on pokemon card for more details {"\n"}
         Page for where to find pokemon per game {"\n"}
         Team builder with suggestions? {"\n"}
+        Pokemon forms Ids start at 10000
       </div>
       <div className="favorites-outer">
       <div className="favorites-title">Favorites</div>
