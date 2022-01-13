@@ -1,6 +1,6 @@
 const models = require('../database/models');
 
-const addPokemonToDatabase = async ({id, name, types, stats, sprites}, team_id) => {
+const addPokemonToDatabase = async ({id, name, types, stats, sprites}, team_id, cb) => {
 
   return await models.Pokemon.findByPk(id).then(item => {
     if(!item) {

@@ -27,7 +27,7 @@ module.exports = {
     })
   }),
   addPokemon: ('/', (req, res) => {
-    addPokemon(req.body.pokemon, req.body.team_id).then(item => {
+    addPokemon(req.body.pokemon, req.body.team_id, req.body.cb).then(item => {
       res.send(req.body.pokemon.name);
     })
   }),

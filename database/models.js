@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./index.js');
-const Op = sequelize.Op;
 const Model = Sequelize.Model;
 
 class Pokemon extends Model {};
