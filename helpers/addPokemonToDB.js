@@ -6,11 +6,11 @@ const addPokemonToDatabase = async ({id, name, types, stats, sprites}, team_id) 
   if(!pokemon) {
     const team = await models.Team.findOne({where: { 'id': team_id }});
     const newPokemon = await models.Pokemon.create({id, name, types, stats, sprites});
-    team.addPokemons(newPokemon);
+    await team.addPokemons(newPokemon);
   } else {
     console.log('pokemon already in DB');
     const team = await models.Team.findOne({where: { 'id': team_id }})
-    team.addPokemons(pokemon);
+    await team.addPokemons(pokemon);
   }
 }
 module.exports = addPokemonToDatabase;

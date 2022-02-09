@@ -17,9 +17,10 @@ const App = () => {
     if(localStorage.getItem('username') !== '') {
       setIsLoggedIn(true);
       setCurrentUser(localStorage.getItem('username'));
-    }
+    } 
+    console.log(isLoggedIn);
     getFavoritesFromDB();
-  },[])
+  },[JSON.stringify(favorites), isLoggedIn])
 
   const handlePokemonSearchOverlayButton = () => {
     setIsPokemonOverlayVisible(!isPokemonOverlayVisible);
