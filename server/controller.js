@@ -34,7 +34,7 @@ module.exports = {
   getFavorites: ('/', (req, res) => {
     console.log('team id selected', req.query.team_id);
     getFavorites(req.query.team_id).then((arr) => {
-      console.log('IN THE CONTROLLER', arr);
+      //console.log('IN THE CONTROLLER', arr);
       res.send(arr);
     })
   })
