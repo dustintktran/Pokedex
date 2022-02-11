@@ -26,42 +26,30 @@ const App = () => {
     setIsPokemonOverlayVisible(!isPokemonOverlayVisible);
   }
 
-  const getFavoritesFromDB = () => {
-    if(!isLoggedIn) {
-      return;
-    }
-    $.get('/api/getFav', {team_id: localStorage.getItem('team_id')}).then(item => {
-      console.log('in get favs ', item);
-      setFavorites(item);
-    })
+  const getFavoritesFromDB = async () => {
+    if(!isLoggedIn) return;
+    const fav = await $.get('/api/getFav', {team_id: localStorage.getItem('team_id')})
+    setFavorites(fav);
   }
 
-  const handleSavePokemon = (poke:Pokemon, team:number) => {
+  const handleSavePokemon = async (poke:Pokemon, team:number) => {
     let { id, name, types, stats, sprites } = poke;
-    $.post(`/api/add`, {pokemon: poke, team_id:team}).then((item) => {
-      console.log(item + ' added');
-      getFavoritesFromDB();
-    });
+    await $.post(`/api/add`, {pokemon: poke, team_id:team})
+    getFavoritesFromDB();
   }
 
   const handleLogin = async (username:string, password:string) => {
-    await $.post('/api/login', {username:username,password:password}).then(item => {
-      if(item) {
+    const login = await $.post('/api/login', {username:username,password:password})
+      if(login) {
         localStorage.setItem('username', username);
-        localStorage.setItem('profile_id', item.id);
-        localStorage.setItem('team_id', item.team_id);
-        console.log('login successful');
-        return true;
-      } else {
-        console.log('login failed');
-        return false;
-      }
-    }).then(item => {
-      if(item) {
+        localStorage.setItem('profile_id', login.id);
+        localStorage.setItem('team_id', login.team_id);
         setCurrentUser(username);
         setIsLoggedIn(true);
+        console.log('login successful');
+      } else {
+        console.log('login failed');
       }
-    })
   }
 
   const handleLogout = () => {
@@ -78,10 +66,11 @@ const App = () => {
     <div className="App">
       <Account isLoggedIn={isLoggedIn} handleLogin={handleLogin} handleLogout={handleLogout}/>
       <button className="overlay-search-button" onClick={handlePokemonSearchOverlayButton}>Pokedex</button>
+      
       <PokedexOverlay isVisible={isPokemonOverlayVisible} savePoke={handleSavePokemon} loggedIn={isLoggedIn}/>
       <div className="temporary">
         Functionality to add: {"\n"}
-        Favorites per account {"\n"}
+        DONE -- Favorites per account {"\n"}
         Search for pokemon moves {"\n"}
         Search for pokemon abilities {"\n"}
         Button on pokemon card for more details {"\n"}
